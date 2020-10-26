@@ -1,17 +1,24 @@
 package com.android.covid19;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.ActionBarContextView;
+import androidx.cardview.widget.CardView;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.covid19.model.CovidDataIndia;
 import com.android.covid19.model.Statewise;
+import com.android.covid19.model.Tested;
 import com.android.covid19.retrofit.APIClient;
 import com.google.android.material.snackbar.Snackbar;
 import com.razerdp.widget.animatedpieview.AnimatedPieView;
@@ -19,7 +26,10 @@ import com.razerdp.widget.animatedpieview.AnimatedPieViewConfig;
 import com.razerdp.widget.animatedpieview.data.SimplePieInfo;
 
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -27,14 +37,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Dashboard extends AppCompatActivity {
+public class Dashboard extends AppCompatActivity implements View.OnClickListener {
 
     private long backpress;
     private int TIME_INTERVAL = 5000;
     LinearLayout linearLayout;
     AnimatedPieView chart;
-    TextView confirmed, active, recovered, deceased, tested, delta_confirmed, delta_active, delta_recovered, delta_deceased, delta_tested;
-    String confirm_case, active_case, recover_data, deceased_data, delta_confirmed_data, delta_active_data, delta_recovered_data, delta_deceased_data;
+    TextView confirmed, active, recovered, deceased, tested, delta_confirmed, delta_active, delta_recovered, delta_deceased, delta_tested, last_date, last_time;
+    String confirm_case, active_case, recover_data, deceased_data, test_data, delta_confirmed_data, delta_active_data, delta_recovered_data, delta_deceased_data, delta_test_data, last_update;
+    CovidDataIndia covidDataIndia;
+    String totalTest, oldtest, newsample, oldsample;
+    CardView statebtn, countrybtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +65,7 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onResponse(Call<CovidDataIndia> call, Response<CovidDataIndia> response) {
                 if (response.isSuccessful()){
-                    CovidDataIndia covidDataIndia = response.body();
+                    covidDataIndia = response.body();
                     Statewise statewise = covidDataIndia.getStatewise().get(0);
                     confirm_case = statewise.getConfirmed();
                     active_case = statewise.getActive();
@@ -61,6 +74,7 @@ public class Dashboard extends AppCompatActivity {
                     delta_confirmed_data = statewise.getDeltaconfirmed();
                     delta_recovered_data = statewise.getDeltarecovered();
                     delta_deceased_data = statewise.getDeltadeaths();
+                    last_update = statewise.getLastupdatedtime();
 
                     //convert data into number format
                     int confirmint = Integer.parseInt(confirm_case);
@@ -96,6 +110,15 @@ public class Dashboard extends AppCompatActivity {
                     delta_active_data = NumberFormat.getInstance().format(deltaactiveint);
                     delta_active.setText("+"+delta_active_data);
 
+                    //last updated date and time
+                    //date
+                    String date = formatDate(last_update, 1);
+                    last_date.setText(date);
+
+                    //time
+                    String time = formatDate(last_update, 2);
+                    last_time.setText(time);
+
                     AnimatedPieViewConfig config = new AnimatedPieViewConfig();
                     config.startAngle(-90)// Starting angle offset
                             .strokeMode(false)
@@ -110,6 +133,8 @@ public class Dashboard extends AppCompatActivity {
                     // The following two sentences can be replace directly 'mAnimatedPieView.start (config); '
                     chart.applyConfig(config);
                     chart.start();
+
+                    fetchTestData();
                 }
             }
 
@@ -118,6 +143,66 @@ public class Dashboard extends AppCompatActivity {
                 ToastMassage("Failed");
             }
         });
+    }
+
+    private String formatDate(String last_update, int i) {
+        Date date = null;
+        String dateFormat;
+
+        try {
+            date = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.US).parse(last_update);
+            if (i == 1){
+                dateFormat = new SimpleDateFormat("dd MMM", Locale.US).format(date);
+                return dateFormat;
+            }else if (i == 2){
+                dateFormat = new SimpleDateFormat("HH:mm a", Locale.US).format(date);
+                return dateFormat;
+            }else return "error";
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return last_update;
+    }
+
+    private void fetchTestData() {
+        for (Tested tested : covidDataIndia.getTested()){
+            totalTest = tested.getTotalsamplestested();
+            newsample = tested.getSamplereportedtoday();
+        }
+        if (totalTest.isEmpty()){
+            for (int i = 0; i < covidDataIndia.getTested().size() - 1; i++){
+                Tested tested = covidDataIndia.getTested().get(i);
+                oldtest = tested.getTotalsamplestested();
+                oldsample = tested.getSamplereportedtoday();
+            }
+
+            //if recent test data is empty then fetch previous data(older data)
+            test_data = oldtest;
+            int oldtestint = Integer.parseInt(test_data);
+            test_data = NumberFormat.getInstance().format(oldtestint);
+            tested.setText(test_data);
+
+            //daily sample old tested data
+            delta_test_data = oldsample;
+            int oldsampleint = Integer.parseInt(delta_test_data);
+            delta_test_data = NumberFormat.getInstance().format(oldsampleint);
+            delta_tested.setText("+"+delta_test_data);
+
+        }else {
+
+            //fetch recent tested data
+            test_data = totalTest;
+            int testint = Integer.parseInt(test_data);
+            test_data = NumberFormat.getInstance().format(testint);
+            tested.setText(test_data);
+
+            //fetch recent tested sample data
+            delta_test_data = newsample;
+            int newsampleint = Integer.parseInt(delta_test_data);
+            delta_test_data = NumberFormat.getInstance().format(newsampleint);
+            delta_tested.setText("+"+delta_test_data);
+
+        }
     }
 
     //Toast massage method
@@ -138,6 +223,37 @@ public class Dashboard extends AppCompatActivity {
         delta_recovered = findViewById(R.id.delta_recovered_textview);
         delta_deceased = findViewById(R.id.delta_deceased_textview);
         delta_tested = findViewById(R.id.delta_tested_textview);
+        last_date = findViewById(R.id.dateTextview);
+        last_time = findViewById(R.id.timeTextview);
+
+        statebtn = findViewById(R.id.stateWiseData);
+        statebtn.setOnClickListener(this);
+
+        countrybtn = findViewById(R.id.countryWiseData);
+        countrybtn.setOnClickListener(this);
+    }
+
+    //option bar menu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.option_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.about:
+                ToastMassage("clicked about");
+                break;
+            case R.id.team:
+                ToastMassage("clicked team");
+                break;
+            case R.id.setting:
+                ToastMassage("clicked setting");
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -150,5 +266,17 @@ public class Dashboard extends AppCompatActivity {
         }
         backpress = System.currentTimeMillis();
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.stateWiseData:
+                startActivity(new Intent(Dashboard.this, States.class));
+                break;
+            case R.id.countryWiseData:
+                startActivity(new Intent(Dashboard.this, Countries.class));
+                break;
+        }
     }
 }

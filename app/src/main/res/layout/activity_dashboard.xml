@@ -19,7 +19,7 @@
         android:layout_marginBottom="5dp"
         android:layout_weight="1.2"
         app:cardCornerRadius="3dp"
-        app:cardElevation="5dp">
+        app:cardElevation="3dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -127,7 +127,7 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
                 app:cardCornerRadius="3dp"
-                app:cardElevation="5dp">
+                app:cardElevation="3dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -140,6 +140,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Confirmed"
+                        android:textColor="@color/red"
                         android:textAlignment="center"
                         android:textSize="16sp"
                         android:textStyle="normal" />
@@ -158,6 +159,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="+78,569"
+                        android:textColor="@color/red"
                         android:textAlignment="center"
                         android:textSize="14sp" />
 
@@ -175,7 +177,7 @@
                 android:layout_marginEnd="14dp"
                 android:layout_marginBottom="5dp"
                 app:cardCornerRadius="3dp"
-                app:cardElevation="5dp">
+                app:cardElevation="3dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -188,6 +190,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Active"
+                        android:textColor="@color/blue"
                         android:textAlignment="center"
                         android:textSize="16sp"
                         android:textStyle="normal" />
@@ -206,6 +209,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="+78,569"
+                        android:textColor="@color/blue"
                         android:textAlignment="center"
                         android:textSize="14sp" />
 
@@ -223,7 +227,7 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
                 app:cardCornerRadius="3dp"
-                app:cardElevation="5dp">
+                app:cardElevation="3dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -236,6 +240,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Recovered"
+                        android:textColor="@color/green"
                         android:textAlignment="center"
                         android:textSize="16sp"
                         android:textStyle="normal" />
@@ -254,6 +259,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="+78,569"
+                        android:textColor="@color/green"
                         android:textAlignment="center"
                         android:textSize="14sp" />
 
@@ -271,7 +277,7 @@
                 android:layout_marginEnd="14dp"
                 android:layout_marginBottom="5dp"
                 app:cardCornerRadius="3dp"
-                app:cardElevation="5dp">
+                app:cardElevation="3dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -284,6 +290,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Deceased"
+                        android:textColor="@color/gray"
                         android:textAlignment="center"
                         android:textSize="16sp"
                         android:textStyle="normal" />
@@ -302,6 +309,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="+78,569"
+                        android:textColor="@color/gray"
                         android:textAlignment="center"
                         android:textSize="14sp" />
 
@@ -321,7 +329,7 @@
         android:layout_marginBottom="5dp"
         android:layout_weight="0.9"
         app:cardCornerRadius="3dp"
-        app:cardElevation="5dp">
+        app:cardElevation="3dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -334,6 +342,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Samples tested"
+                android:textColor="@color/purple"
                 android:textAlignment="center"
                 android:textSize="16sp"
                 android:textStyle="normal" />
@@ -352,6 +361,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="+78,569"
+                android:textColor="@color/purple"
                 android:textAlignment="center"
                 android:textSize="14sp" />
 
@@ -367,7 +377,8 @@
         android:layout_marginEnd="14dp"
         android:layout_marginBottom="5dp"
         android:layout_weight="0.4"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center">
 
         <TextView
             android:layout_width="match_parent"
@@ -375,16 +386,34 @@
             android:text="Last Update"
             android:textAlignment="center"
             android:textAllCaps="false"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="22 oct, 10:10 pm"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textSize="20sp" />
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/dateTextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="textEnd"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:text="22 oct"/>
+            <TextView
+                android:id="@+id/timeTextview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textAlignment="textStart"
+                android:textAllCaps="false"
+                android:text="10:10 pm"
+                android:layout_marginStart="5dp"/>
+
+        </LinearLayout>
     </LinearLayout>
 
     <GridLayout
@@ -395,6 +424,7 @@
         android:rowCount="1">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/stateWiseData"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
@@ -402,7 +432,8 @@
             android:layout_marginStart="14dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="8dp"
+            app:cardBackgroundColor="@color/button_bg"
             app:cardCornerRadius="3dp">
 
             <LinearLayout
@@ -416,23 +447,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="State Data"
+                    android:textColor="@color/white"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="normal" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/countryWiseData"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
             android:layout_marginStart="5dp"
+            app:cardBackgroundColor="@color/button_bg"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="14dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="8dp"
             app:cardCornerRadius="3dp">
 
             <LinearLayout
@@ -446,10 +480,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="World Data"
+                    android:textColor="@color/white"
                     android:textAlignment="center"
                     android:textAllCaps="false"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="normal" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>

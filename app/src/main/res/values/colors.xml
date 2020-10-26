@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorPrimary">#4F5AD2</color>
+    <color name="colorPrimaryDark">#3E4ACD</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="blue">#149BE3</color>
     <color name="green">#14E136</color>
-    <color name="gray">#A0A0A0</color>
+    <color name="gray">#838383</color>
     <color name="red">#E31414</color>
-    <color name="background">#F1F1F1</color>
+    <color name="background">#F6F6F6</color>
+    <color name="purple">#5900FF</color>
+    <color name="white">#ffffff</color>
+    <color name="button_bg">#61B9D6</color>
 </resources>
