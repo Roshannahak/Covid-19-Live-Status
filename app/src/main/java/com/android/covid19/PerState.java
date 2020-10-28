@@ -100,7 +100,7 @@ public class PerState extends AppCompatActivity {
                 .addData(new SimplePieInfo(recoverint, Color.parseColor("#14E136"), "recovered"))//Data (bean that implements the IPieInfo interface)
                 .addData(new SimplePieInfo(activeint, Color.parseColor("#149BE3"), "active"))
                 .addData(new SimplePieInfo(deceasedint, Color.parseColor("#838383"), "deceased"))
-                .duration(2000);// draw pie animation duration
+                .duration(1000);// draw pie animation duration
 
         // The following two sentences can be replace directly 'mAnimatedPieView.start (config); '
         animatedPieView.applyConfig(config);

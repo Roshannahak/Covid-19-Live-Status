@@ -42,7 +42,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.75"
                 android:text="Total Cases"
-                android:textAlignment="textStart"
+                android:textAlignment="center"
                 android:textAllCaps="false"
                 android:textSize="16sp" />
 

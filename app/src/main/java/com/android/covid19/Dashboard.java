@@ -128,7 +128,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                             .addData(new SimplePieInfo(activeint, Color.parseColor("#149BE3"), "Active_case"))//Data (bean that implements the IPieInfo interface)
                             .addData(new SimplePieInfo(recoverint, Color.parseColor("#14E136"), "Recovered"))
                             .addData(new SimplePieInfo(deceasedint, Color.parseColor("#A0A0A0"), "Deceased"))
-                            .duration(2000);// draw pie animation duration
+                            .duration(1000);// draw pie animation duration
 
                     // The following two sentences can be replace directly 'mAnimatedPieView.start (config); '
                     chart.applyConfig(config);

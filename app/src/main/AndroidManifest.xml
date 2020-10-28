@@ -11,9 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PerState"
+        <activity android:name=".PerCountry"
             android:screenOrientation="portrait"
-            android:parentActivityName=".States"/>
+            android:parentActivityName=".Countries"/>
+        <activity
+            android:name=".PerState"
+            android:parentActivityName=".States"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Countries"
             android:parentActivityName=".Dashboard"
