@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,16 +16,19 @@ import com.android.covid19.R;
 import com.android.covid19.model.Statewise;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Callback;
 
-public class StatewiseDataAdapter extends RecyclerView.Adapter<StatewiseDataAdapter.StatewiseViewHolder> {
+public class StatewiseDataAdapter extends RecyclerView.Adapter<StatewiseDataAdapter.StatewiseViewHolder> implements Filterable {
 
     String confirmed, statename;
 
     Context context;
     List<Statewise> statewiseList;
+    List<Statewise> statewiseListcopy;
+
     public interface perStateRecyclerClickInterface{
         void itemOnClick(int position);
     }
@@ -35,6 +40,7 @@ public class StatewiseDataAdapter extends RecyclerView.Adapter<StatewiseDataAdap
     public StatewiseDataAdapter(Context context, List<Statewise> statewiseList){
         this.context = context;
         this.statewiseList = statewiseList;
+        statewiseListcopy = new ArrayList<>(statewiseList);
     }
 
     @NonNull
@@ -80,4 +86,37 @@ public class StatewiseDataAdapter extends RecyclerView.Adapter<StatewiseDataAdap
             });
         }
     }
+
+    @Override
+    public Filter getFilter() {
+        return filtetObject;
+    }
+    private Filter filtetObject = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Statewise> filteredlist = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0){
+                filteredlist.addAll(statewiseListcopy);
+            }else {
+                String filterpattern = constraint.toString().toLowerCase().trim();
+
+                for (Statewise statewise : statewiseListcopy){
+                    if (statewise.getState().toLowerCase().contains(filterpattern)){
+                        filteredlist.add(statewise);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredlist;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            statewiseList.clear();
+            statewiseList.addAll((List)results.values);
+            notifyDataSetChanged();
+        }
+    };
 }

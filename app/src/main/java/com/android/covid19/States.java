@@ -1,15 +1,18 @@
 package com.android.covid19;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.covid19.adapter.StatewiseDataAdapter;
+import com.android.covid19.library.ProgressBarLoader;
 import com.android.covid19.model.CovidDataIndia;
 import com.android.covid19.model.Statewise;
 import com.android.covid19.retrofit.APIClient;
@@ -35,6 +38,7 @@ public class States extends AppCompatActivity implements StatewiseDataAdapter.pe
 
     RecyclerView stateRecycler;
     List<Statewise> newstatewiseslist;
+    StatewiseDataAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,7 @@ public class States extends AppCompatActivity implements StatewiseDataAdapter.pe
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         initializationView();
+        ProgressBarLoader.showDialog(States.this);
         fetchRecyclerData();
     }
 
@@ -61,14 +66,16 @@ public class States extends AppCompatActivity implements StatewiseDataAdapter.pe
                     for (Statewise statewise : statewiselist.subList(1, statewiselist.size())){
                         newstatewiseslist.add(statewise);
                     }
-                    StatewiseDataAdapter adapter = new StatewiseDataAdapter(getApplicationContext(), newstatewiseslist);
+                    adapter = new StatewiseDataAdapter(getApplicationContext(), newstatewiseslist);
                     adapter.setOnItemClickListener(States.this);
                     stateRecycler.setAdapter(adapter);
+                    ProgressBarLoader.dismissDialog();
                 }
             }
 
             @Override
             public void onFailure(Call<CovidDataIndia> call, Throwable t) {
+                ProgressBarLoader.dismissDialog();
                 ToastMassage("failed");
             }
         });
@@ -87,7 +94,22 @@ public class States extends AppCompatActivity implements StatewiseDataAdapter.pe
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_action, menu);
-        return super.onCreateOptionsMenu(menu);
+        MenuItem menuItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return true;
     }
 
     @Override

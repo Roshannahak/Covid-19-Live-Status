@@ -1,6 +1,7 @@
 package com.android.covid19;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -8,9 +9,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.android.covid19.adapter.CountrywiseDataAdapter;
+import com.android.covid19.library.ProgressBarLoader;
 import com.android.covid19.model.CountryInfo;
 import com.android.covid19.model.CovidDataWorld;
 import com.android.covid19.retrofit.APIClient;
@@ -37,6 +40,7 @@ public class Countries extends AppCompatActivity implements CountrywiseDataAdapt
 
     RecyclerView recyclerView;
     List<CovidDataWorld> covidDataWorldList;
+    CountrywiseDataAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,7 @@ public class Countries extends AppCompatActivity implements CountrywiseDataAdapt
         recyclerView = findViewById(R.id.countrywishRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        ProgressBarLoader.showDialog(Countries.this);
         fetchdataFromServer();
     }
 
@@ -60,16 +65,17 @@ public class Countries extends AppCompatActivity implements CountrywiseDataAdapt
             public void onResponse(Call<List<CovidDataWorld>> call, Response<List<CovidDataWorld>> response) {
                 if (response.isSuccessful()) {
                     covidDataWorldList = response.body();
-                    CountrywiseDataAdapter adapter = new CountrywiseDataAdapter(getApplicationContext(), covidDataWorldList);
+                    adapter = new CountrywiseDataAdapter(getApplicationContext(), covidDataWorldList);
                     adapter.setItemClickListener(Countries.this);
                     recyclerView.setAdapter(adapter);
+                    ProgressBarLoader.dismissDialog();
                 }
             }
 
             @Override
             public void onFailure(Call<List<CovidDataWorld>> call, Throwable t) {
+                ProgressBarLoader.dismissDialog();
                 ToastMassage("failed");
-                Log.d("server", String.valueOf(t));
             }
         });
     }
@@ -82,7 +88,23 @@ public class Countries extends AppCompatActivity implements CountrywiseDataAdapt
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_action, menu);
-        return super.onCreateOptionsMenu(menu);
+
+        MenuItem menuItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) menuItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return true;
     }
 
     @Override

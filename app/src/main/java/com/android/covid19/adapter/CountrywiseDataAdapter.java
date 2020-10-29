@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,12 +21,14 @@ import com.android.covid19.model.CovidDataWorld;
 import com.bumptech.glide.Glide;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.List;
 
-public class CountrywiseDataAdapter extends RecyclerView.Adapter<CountrywiseDataAdapter.CountrywiseViewHolder> {
+public class CountrywiseDataAdapter extends RecyclerView.Adapter<CountrywiseDataAdapter.CountrywiseViewHolder> implements Filterable {
 
     Context context;
     List<CovidDataWorld> covidDataWorldList;
+    List<CovidDataWorld> covidDataWorldListcopy;
 
     String country_name;
     String total_case;
@@ -41,6 +45,7 @@ public class CountrywiseDataAdapter extends RecyclerView.Adapter<CountrywiseData
     public CountrywiseDataAdapter(Context context, List<CovidDataWorld> covidDataWorldList){
         this.context = context;
         this.covidDataWorldList = covidDataWorldList;
+        covidDataWorldListcopy = new ArrayList<>(covidDataWorldList);
     }
     @NonNull
     @Override
@@ -92,4 +97,36 @@ public class CountrywiseDataAdapter extends RecyclerView.Adapter<CountrywiseData
             });
         }
     }
+
+    @Override
+    public Filter getFilter() {
+        return filterObject;
+    }
+    private Filter filterObject = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<CovidDataWorld> filterlist = new ArrayList<>();
+            if (constraint == null || constraint.length() == 0){
+                filterlist.addAll(covidDataWorldListcopy);
+            }else {
+                String filterpattern = constraint.toString().toLowerCase().trim();
+
+                for (CovidDataWorld covidDataWorld : covidDataWorldListcopy){
+                    if (covidDataWorld.getCountry().toLowerCase().contains(filterpattern)){
+                        filterlist.add(covidDataWorld);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filterlist;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            covidDataWorldList.clear();
+            covidDataWorldList.addAll((List)results.values);
+            notifyDataSetChanged();
+        }
+    };
 }

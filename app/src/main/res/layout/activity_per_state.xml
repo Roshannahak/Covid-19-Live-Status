@@ -149,7 +149,7 @@
                         android:id="@+id/perstate_confirm_count_textview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="7,360,251"
+                        android:text=""
                         android:textAlignment="center"
                         android:textSize="24sp"
                         android:textStyle="normal" />
@@ -158,7 +158,7 @@
                         android:id="@+id/perstate_delta_confirmed_textview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="+78,569"
+                        android:text=""
                         android:textColor="@color/red"
                         android:textAlignment="center"
                         android:textSize="14sp" />
@@ -199,7 +199,7 @@
                         android:id="@+id/perstate_active_count_textview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="7,360,251"
+                        android:text=""
                         android:textAlignment="center"
                         android:textSize="24sp"
                         android:textStyle="normal" />
@@ -208,7 +208,7 @@
                         android:id="@+id/perstate_delta_active_textview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="+78,569"
+                        android:text=""
                         android:textColor="@color/blue"
                         android:textAlignment="center"
                         android:textSize="14sp" />
@@ -249,7 +249,7 @@
                         android:id="@+id/perstate_recovered_count_textview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="7,360,251"
+                        android:text=""
                         android:textAlignment="center"
                         android:textSize="24sp"
                         android:textStyle="normal" />
@@ -258,7 +258,7 @@
                         android:id="@+id/perstate_delta_recovered_textview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="+78,569"
+                        android:text=""
                         android:textColor="@color/green"
                         android:textAlignment="center"
                         android:textSize="14sp" />
@@ -299,7 +299,7 @@
                         android:id="@+id/perstate_deceased_count_textview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="7,360,251"
+                        android:text=""
                         android:textAlignment="center"
                         android:textSize="24sp"
                         android:textStyle="normal" />
@@ -308,7 +308,7 @@
                         android:id="@+id/perstate_delta_deceased_textview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="+78,569"
+                        android:text=""
                         android:textColor="@color/gray"
                         android:textAlignment="center"
                         android:textSize="14sp" />
@@ -353,7 +353,7 @@
                 android:textAlignment="textEnd"
                 android:textAllCaps="false"
                 android:textSize="18sp"
-                android:text="22 oct"/>
+                android:text=""/>
             <TextView
                 android:id="@+id/perstate_timeTextview"
                 android:layout_width="wrap_content"
@@ -361,7 +361,7 @@
                 android:textSize="18sp"
                 android:textAlignment="textStart"
                 android:textAllCaps="false"
-                android:text="10:10 pm"
+                android:text=""
                 android:layout_marginStart="5dp"/>
 
         </LinearLayout>

@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.covid19.library.ProgressBarLoader;
 import com.android.covid19.model.CovidDataIndia;
 import com.android.covid19.model.Statewise;
 import com.android.covid19.model.Tested;
@@ -55,6 +56,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_dashboard);
 
         initializationView();
+        ProgressBarLoader.showDialog(Dashboard.this);
         fatchData();
 
     }
@@ -135,11 +137,13 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                     chart.start();
 
                     fetchTestData();
+                    ProgressBarLoader.dismissDialog();
                 }
             }
 
             @Override
             public void onFailure(Call<CovidDataIndia> call, Throwable t) {
+                ProgressBarLoader.dismissDialog();
                 ToastMassage("Failed");
             }
         });
