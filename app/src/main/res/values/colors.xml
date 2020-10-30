@@ -13,4 +13,5 @@
     <color name="button_bg">#61B9D6</color>
     <color name="orange">#DA7913</color>
     <color name="transparentBg">#D8000000</color>
+    <color name="linkcolor">#00CCFF</color>
 </resources>

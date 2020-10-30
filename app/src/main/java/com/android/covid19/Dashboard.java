@@ -248,13 +248,13 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.about:
-                ToastMassage("clicked about");
+                startActivity(new Intent(Dashboard.this, About.class));
                 break;
             case R.id.team:
                 startActivity(new Intent(Dashboard.this, Team.class));
                 break;
             case R.id.setting:
-                ToastMassage("clicked setting");
+                startActivity(new Intent(Dashboard.this, Settings.class));
                 break;
         }
         return super.onOptionsItemSelected(item);

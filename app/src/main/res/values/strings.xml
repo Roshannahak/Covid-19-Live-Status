@@ -2,4 +2,42 @@
     <string name="app_name">Covid-19 App</string>
     <string name="community">Developer\'s\nCommunity</string>
     <string name="powered_by">Powered by</string>
+    <string name="objective">This COVID-19 app of ours mainly centralizes on the idea of pooling all the data into one cohesive platform, to help you track real-time information, do the correct trend analysis and make comparisons of different states of India and other countries.
+        \n\nThis mobile application will also include some awareness contents/ streamers to make the users realise to be more cautious and avoid the propagation of the virus
+        \n\n<b>Some features to be included in this app:</b>
+    </string>
+    <string name="feature">
+        \u2022  Detailed dashboard screen
+        \n\u2022  Current state and country wise data
+        \n\u2022  Active search bar to search states/countries
+        \n\u2022  Active voice search
+        \n\u2022  Pie chart representation of the data
+        \n\u2022  Visible country wise flags
+        \n\u2022  Swipe to refresh
+        \n\u2022  Enable light to dark mode
+    </string>
+
+    <string name="software"><u>Software requirements:</u></string>
+    <string name="listOfsoft">
+        \u2022  Android Studio (4.0.1)
+        \n\u2022  Android device or emulator
+        \n\u2022  Technology: java, xml, json
+    </string>
+
+    <string name="lib"><u>Libraries used:</u></string>
+    <string name="listOflib">
+        \u2022  Glide
+        \n\u2022  Retrofit 2
+        \n\u2022  Gson
+        \n\u2022  Animated Pie View
+        \n\u2022  Circle Image View
+    </string>
+
+    <string name="api"><u>APIs used:</u></string>
+    <string name="listOfapi1">
+        \u2022  <u>https://api.covid19india.org/data.json</u>
+    </string>
+    <string name="listOfapi2">
+        \u2022  <u>https://corona.lmao.ninja/v2/countries</u>
+    </string>
 </resources>

@@ -12,9 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Team"
+        <activity android:name=".About"
             android:screenOrientation="portrait"
-            android:theme="@style/transparent"/>
+            android:parentActivityName=".Dashboard"/>
+        <activity android:name=".Settings"
+            android:screenOrientation="portrait"
+            android:parentActivityName=".Dashboard"/>
+        <activity
+            android:name=".Team"
+            android:screenOrientation="portrait"
+            android:theme="@style/transparent" />
         <activity
             android:name=".PerCountry"
             android:parentActivityName=".Countries"
