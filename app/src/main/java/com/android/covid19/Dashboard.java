@@ -251,7 +251,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                 ToastMassage("clicked about");
                 break;
             case R.id.team:
-                ToastMassage("clicked team");
+                startActivity(new Intent(Dashboard.this, Team.class));
                 break;
             case R.id.setting:
                 ToastMassage("clicked setting");

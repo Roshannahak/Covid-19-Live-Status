@@ -15,4 +15,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--transparent activity-->
+    <style name="transparent" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/transparentBg</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+    </style>
+
 </resources>
