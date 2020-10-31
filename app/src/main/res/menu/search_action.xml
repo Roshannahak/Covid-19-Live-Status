@@ -7,4 +7,9 @@
         android:icon="@drawable/icon_search_24"
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+    <item
+        android:id="@+id/voice_search"
+        android:title="Voice"
+        android:icon="@drawable/ic_voice_24"
+        app:showAsAction="ifRoom"/>
 </menu>
