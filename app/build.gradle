@@ -40,4 +40,6 @@ dependencies {
 
     implementation 'com.mikhaellopez:circularimageview:4.2.0'       //https://github.com/lopspower/CircularImageView
 
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
 }

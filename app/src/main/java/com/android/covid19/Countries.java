@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,6 +49,8 @@ public class Countries extends AppCompatActivity implements CountrywiseDataAdapt
     List<CovidDataWorld> covidDataWorldList;
     CountrywiseDataAdapter adapter;
 
+    SwipeRefreshLayout swipelayout;
+
     SearchView searchView;
     String s;
 
@@ -60,11 +63,21 @@ public class Countries extends AppCompatActivity implements CountrywiseDataAdapt
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        swipelayout = findViewById(R.id.countrySwipeRefresh);
         recyclerView = findViewById(R.id.countrywishRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         ProgressBarLoader.showDialog(Countries.this);
         fetchdataFromServer();
+
+        swipelayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchdataFromServer();
+                swipelayout.setRefreshing(false);
+                ToastMassage("Updated");
+            }
+        });
     }
 
     private void fetchdataFromServer() {

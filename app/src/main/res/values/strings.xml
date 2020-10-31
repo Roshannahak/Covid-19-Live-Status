@@ -31,6 +31,7 @@
         \n\u2022  Gson
         \n\u2022  Animated Pie View
         \n\u2022  Circle Image View
+        \n\u2022  SwipeRefreshLayout
     </string>
 
     <string name="api"><u>APIs used:</u></string>

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.ActionBarContextView;
 import androidx.cardview.widget.CardView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -49,6 +50,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     CovidDataIndia covidDataIndia;
     String totalTest, oldtest, newsample, oldsample;
     CardView statebtn, countrybtn;
+    SwipeRefreshLayout swipelayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,14 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         ProgressBarLoader.showDialog(Dashboard.this);
         fatchData();
 
+        swipelayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fatchData();
+                swipelayout.setRefreshing(false);
+                ToastMassage("Updated");
+            }
+        });
     }
 
     private void fatchData() {
@@ -216,6 +226,8 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 
     private void initializationView() {
         linearLayout = findViewById(R.id.liniarlayout);
+        swipelayout = findViewById(R.id.dashboardSwipeRefresh);
+
         chart = findViewById(R.id.animatedpieview);
         confirmed = findViewById(R.id.confirm_count_textview);
         active = findViewById(R.id.active_count_textview);

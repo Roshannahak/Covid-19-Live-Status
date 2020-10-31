@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -47,6 +48,8 @@ public class States extends AppCompatActivity implements StatewiseDataAdapter.pe
     List<Statewise> newstatewiseslist;
     StatewiseDataAdapter adapter;
 
+    SwipeRefreshLayout swipelayout;
+
     SearchView searchView;
     String s;
 
@@ -62,6 +65,15 @@ public class States extends AppCompatActivity implements StatewiseDataAdapter.pe
         initializationView();
         ProgressBarLoader.showDialog(States.this);
         fetchRecyclerData();
+
+        swipelayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                fetchRecyclerData();
+                swipelayout.setRefreshing(false);
+                ToastMassage("Updated");
+            }
+        });
     }
 
     private void fetchRecyclerData() {
@@ -96,6 +108,7 @@ public class States extends AppCompatActivity implements StatewiseDataAdapter.pe
     }
 
     private void initializationView() {
+        swipelayout = findViewById(R.id.stateSwipeRefresh);
         stateRecycler = findViewById(R.id.statewishRecyclerView);
         stateRecycler.setLayoutManager(new LinearLayoutManager(this));
     }
