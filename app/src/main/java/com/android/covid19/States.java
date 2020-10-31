@@ -1,5 +1,7 @@
 package com.android.covid19;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -17,8 +21,11 @@ import com.android.covid19.model.CovidDataIndia;
 import com.android.covid19.model.Statewise;
 import com.android.covid19.retrofit.APIClient;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,6 +46,9 @@ public class States extends AppCompatActivity implements StatewiseDataAdapter.pe
     RecyclerView stateRecycler;
     List<Statewise> newstatewiseslist;
     StatewiseDataAdapter adapter;
+
+    SearchView searchView;
+    String s;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +105,8 @@ public class States extends AppCompatActivity implements StatewiseDataAdapter.pe
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.search_action, menu);
         MenuItem menuItem = menu.findItem(R.id.search);
-        SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView = (SearchView) menuItem.getActionView();
+        searchView.setQueryHint("Search State..");
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -110,6 +121,36 @@ public class States extends AppCompatActivity implements StatewiseDataAdapter.pe
             }
         });
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.voice_search:
+                Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+                intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak state name...");
+                startActivityForResult(intent, 1);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && data != null){
+            ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            s = String.valueOf(result);
+            String withoutAccent = Normalizer.normalize(s, Normalizer.Form.NFD);
+            String output = withoutAccent.replaceAll("[^a-zA-Z ]", "");
+            adapter.getFilter().filter(output);
+            searchView.onActionViewExpanded();
+            searchView.setQuery(output, false);
+            searchView.setFocusable(true);
+            Log.d("voice", output);
+        }
     }
 
     @Override
