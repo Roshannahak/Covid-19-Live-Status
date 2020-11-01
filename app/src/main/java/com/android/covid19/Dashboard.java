@@ -42,7 +42,7 @@ import retrofit2.Response;
 public class Dashboard extends AppCompatActivity implements View.OnClickListener {
 
     private long backpress;
-    private int TIME_INTERVAL = 5000;
+    private int TIME_INTERVAL = 3000;
     LinearLayout linearLayout;
     AnimatedPieView chart;
     TextView confirmed, active, recovered, deceased, tested, delta_confirmed, delta_active, delta_recovered, delta_deceased, delta_tested, last_date, last_time;
