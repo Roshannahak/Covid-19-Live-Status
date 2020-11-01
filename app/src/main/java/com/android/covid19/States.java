@@ -155,7 +155,7 @@ public class States extends AppCompatActivity implements StatewiseDataAdapter.pe
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && data != null){
             ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            s = String.valueOf(result);
+            s = String.valueOf(result.get(0));
             String withoutAccent = Normalizer.normalize(s, Normalizer.Form.NFD);
             String output = withoutAccent.replaceAll("[^a-zA-Z ]", "");
             adapter.getFilter().filter(output);
