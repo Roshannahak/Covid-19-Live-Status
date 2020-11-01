@@ -1,14 +1,22 @@
 package com.android.covid19;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.ActionBarContextView;
 import androidx.cardview.widget.CardView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.provider.Contacts;
+import android.telecom.Connection;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -58,8 +66,12 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_dashboard);
 
         initializationView();
-        ProgressBarLoader.showDialog(Dashboard.this);
-        fatchData();
+        if (isConnected(this)) {
+            ProgressBarLoader.showDialog(Dashboard.this);
+            fatchData();
+        }else {
+            showConnectionDialog();
+        }
 
         swipelayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -69,6 +81,38 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                 ToastMassage("Updated");
             }
         });
+    }
+
+    private void showConnectionDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("warning!!")
+                .setMessage("Please connect to the Internet!!")
+                .setCancelable(false)
+                .setPositiveButton("connect", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(android.provider.Settings.ACTION_WIFI_SETTINGS));
+                    }
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private boolean isConnected(Dashboard dashboard) {
+        ConnectivityManager connectivityManager = (ConnectivityManager) dashboard.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo wificonn = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+        NetworkInfo mobiledata = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+
+        if ((wificonn != null && wificonn.isConnected() || (mobiledata != null && mobiledata.isConnected()))){
+            return true;
+        }else return false;
     }
 
     private void fatchData() {
@@ -154,7 +198,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
             @Override
             public void onFailure(Call<CovidDataIndia> call, Throwable t) {
                 ProgressBarLoader.dismissDialog();
-                ToastMassage("Failed");
+                ToastMassage("may be internet connection is slow!!");
             }
         });
     }

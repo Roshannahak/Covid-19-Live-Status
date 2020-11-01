@@ -97,7 +97,7 @@ public class Countries extends AppCompatActivity implements CountrywiseDataAdapt
             @Override
             public void onFailure(Call<List<CovidDataWorld>> call, Throwable t) {
                 ProgressBarLoader.dismissDialog();
-                ToastMassage("failed");
+                ToastMassage("Can't reach to the server");
             }
         });
     }

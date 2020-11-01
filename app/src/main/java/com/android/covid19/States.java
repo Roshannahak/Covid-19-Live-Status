@@ -98,7 +98,7 @@ public class States extends AppCompatActivity implements StatewiseDataAdapter.pe
             @Override
             public void onFailure(Call<CovidDataIndia> call, Throwable t) {
                 ProgressBarLoader.dismissDialog();
-                ToastMassage("failed");
+                ToastMassage("Can't reach to the server");
             }
         });
     }
