@@ -78,7 +78,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
             public void onRefresh() {
                 fatchData();
                 swipelayout.setRefreshing(false);
-                ToastMassage("Updated");
+                ToastMassage("refreshed");
             }
         });
     }

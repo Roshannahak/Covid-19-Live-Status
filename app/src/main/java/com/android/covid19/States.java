@@ -71,7 +71,7 @@ public class States extends AppCompatActivity implements StatewiseDataAdapter.pe
             public void onRefresh() {
                 fetchRecyclerData();
                 swipelayout.setRefreshing(false);
-                ToastMassage("Updated");
+                ToastMassage("refreshed");
             }
         });
     }

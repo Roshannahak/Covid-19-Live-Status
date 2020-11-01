@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="2"
+    android:background="@color/white"
     tools:context=".Splash_screen"
     android:orientation="vertical">
 

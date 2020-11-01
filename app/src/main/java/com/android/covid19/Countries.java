@@ -75,7 +75,7 @@ public class Countries extends AppCompatActivity implements CountrywiseDataAdapt
             public void onRefresh() {
                 fetchdataFromServer();
                 swipelayout.setRefreshing(false);
-                ToastMassage("Updated");
+                ToastMassage("refreshed");
             }
         });
     }

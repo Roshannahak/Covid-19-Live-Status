@@ -441,7 +441,7 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="8dp"
                 app:cardBackgroundColor="@color/button_bg"
-                app:cardCornerRadius="3dp">
+                app:cardCornerRadius="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -457,7 +457,7 @@
                         android:textAlignment="center"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:textStyle="normal" />
                 </LinearLayout>
 
@@ -474,7 +474,7 @@
                 android:layout_marginEnd="14dp"
                 android:layout_marginBottom="8dp"
                 app:cardBackgroundColor="@color/button_bg"
-                app:cardCornerRadius="3dp">
+                app:cardCornerRadius="4dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -490,7 +490,7 @@
                         android:textAlignment="center"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="20sp"
+                        android:textSize="18sp"
                         android:textStyle="normal" />
                 </LinearLayout>
 
