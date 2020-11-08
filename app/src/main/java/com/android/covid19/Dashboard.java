@@ -53,8 +53,8 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     private int TIME_INTERVAL = 3000;
     LinearLayout linearLayout;
     AnimatedPieView chart;
-    TextView confirmed, active, recovered, deceased, tested, delta_confirmed, delta_active, delta_recovered, delta_deceased, delta_tested, last_date, last_time;
-    String confirm_case, active_case, recover_data, deceased_data, test_data, delta_confirmed_data, delta_active_data, delta_recovered_data, delta_deceased_data, delta_test_data, last_update;
+    TextView confirmed, active, recovered, deceased, tested, delta_confirmed, delta_recovered, delta_deceased, delta_tested, last_date, last_time;
+    String confirm_case, active_case, recover_data, deceased_data, test_data, delta_confirmed_data, delta_recovered_data, delta_deceased_data, delta_test_data, last_update;
     CovidDataIndia covidDataIndia;
     String totalTest, oldtest, newsample, oldsample;
     CardView statebtn, countrybtn;
@@ -160,11 +160,6 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                     int deltadeceasedint = Integer.parseInt(delta_deceased_data);
                     delta_deceased_data = NumberFormat.getInstance().format(deltadeceasedint);
                     delta_deceased.setText("+"+delta_deceased_data);
-
-                    //calculate delta active case
-                    int deltaactiveint = deltaconfirmint - deltarecoverint + deltadeceasedint;
-                    delta_active_data = NumberFormat.getInstance().format(deltaactiveint);
-                    delta_active.setText("+"+delta_active_data);
 
                     //last updated date and time
                     //date
@@ -281,7 +276,6 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         deceased = findViewById(R.id.deceased_count_textview);
         tested = findViewById(R.id.tested_count_textview);
         delta_confirmed = findViewById(R.id.delta_confirmed_textview);
-        delta_active = findViewById(R.id.delta_active_textview);
         delta_recovered = findViewById(R.id.delta_recovered_textview);
         delta_deceased = findViewById(R.id.delta_deceased_textview);
         delta_tested = findViewById(R.id.delta_tested_textview);

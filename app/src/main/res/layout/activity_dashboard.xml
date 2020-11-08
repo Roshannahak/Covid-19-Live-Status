@@ -210,15 +210,6 @@
                             android:textSize="24sp"
                             android:textStyle="normal" />
 
-                        <TextView
-                            android:id="@+id/delta_active_textview"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text=""
-                            android:textAlignment="center"
-                            android:textColor="@color/blue"
-                            android:textSize="14sp" />
-
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
