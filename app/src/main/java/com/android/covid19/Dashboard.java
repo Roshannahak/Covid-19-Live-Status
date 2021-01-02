@@ -31,6 +31,7 @@ import com.android.covid19.model.Statewise;
 import com.android.covid19.model.Tested;
 import com.android.covid19.retrofit.APIClient;
 import com.google.android.material.snackbar.Snackbar;
+import com.onesignal.OneSignal;
 import com.razerdp.widget.animatedpieview.AnimatedPieView;
 import com.razerdp.widget.animatedpieview.AnimatedPieViewConfig;
 import com.razerdp.widget.animatedpieview.data.SimplePieInfo;
@@ -49,6 +50,8 @@ import retrofit2.Response;
 
 public class Dashboard extends AppCompatActivity implements View.OnClickListener {
 
+    private static final String ONESIGNAL_APP_ID = "635d68b5-5911-4aec-ad5c-6467883286ee";
+
     private long backpress;
     private int TIME_INTERVAL = 3000;
     LinearLayout linearLayout;
@@ -66,6 +69,14 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_dashboard);
 
         initializationView();
+
+        // Enable verbose OneSignal logging to debug issues if needed.
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
+
+        // OneSignal Initialization
+        OneSignal.initWithContext(this);
+        OneSignal.setAppId(ONESIGNAL_APP_ID);
+
         if (isConnected(this)) {
             ProgressBarLoader.showDialog(Dashboard.this);
             fatchData();
