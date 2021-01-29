@@ -9,11 +9,12 @@
 
     <!-- light Action Bar Theme -->
     <style name="LightActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+
         <item name="colorPrimary">#243B55</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="android:navigationBarColor">#ffffff</item>
 
         <item name="parent_background_color">#F6F6F6</item>
         <item name="default_text_color">#6C6C6C</item>
@@ -31,11 +32,12 @@
 
     <!-- dark Action Bar Theme -->
     <style name="DarkActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+
         <item name="colorPrimary">#18191A</item>
         <item name="colorPrimaryDark">#18191A</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+        <item name="android:navigationBarColor">#18191A</item>
 
         <item name="parent_background_color">#18191A</item>
         <item name="default_text_color">#E4E6EB</item>
