@@ -7,12 +7,54 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!-- No Action Bar Theme -->
-    <style name="NoActionBarAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- light Action Bar Theme -->
+    <style name="LightActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">#243B55</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+
+        <item name="parent_background_color">#F6F6F6</item>
+        <item name="default_text_color">#6C6C6C</item>
+        <item name="card_background_color">#ffffff</item>
+        <item name="button_background_color">#4B79A1</item>
+        <item name="red">#E31414</item>
+        <item name="blue">#149BE3</item>
+        <item name="green">#14E136</item>
+        <item name="gray">#838383</item>
+        <item name="purple">#5900FF</item>
+        <item name="orange">#DA7913</item>
+
+        <item name="android:windowAnimationStyle">@style/windowTransitionEffect</item>
+    </style>
+
+    <!-- dark Action Bar Theme -->
+    <style name="DarkActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#18191A</item>
+        <item name="colorPrimaryDark">#18191A</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Dark</item>
+
+        <item name="parent_background_color">#18191A</item>
+        <item name="default_text_color">#E4E6EB</item>
+        <item name="card_background_color">#242526</item>
+        <item name="button_background_color">#3A3B3C</item>
+        <item name="red">#E31414</item>
+        <item name="blue">#149BE3</item>
+        <item name="green">#14E136</item>
+        <item name="gray">#838383</item>
+        <item name="purple">#F375B5</item>
+        <item name="orange">#DA7913</item>
+
+        <item name="android:windowAnimationStyle">@style/windowTransitionEffect</item>
+    </style>
+
+    <!--transition effect between dark and light mode-->
+    <style name="windowTransitionEffect">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
     </style>
 
     <!--transparent activity-->

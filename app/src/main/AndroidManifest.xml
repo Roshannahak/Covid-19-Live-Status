@@ -13,12 +13,14 @@
         android:roundIcon="@mipmap/ic_new_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".About"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".Dashboard"/>
-        <activity android:name=".Settings"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".Dashboard"/>
+        <activity
+            android:name=".About"
+            android:parentActivityName=".Dashboard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Settings"
+            android:parentActivityName=".Dashboard"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Team"
             android:screenOrientation="portrait"
@@ -45,7 +47,7 @@
         <activity
             android:name=".Splash_screen"
             android:screenOrientation="portrait"
-            android:theme="@style/NoActionBarAppTheme">
+            android:theme="@style/LightActionBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

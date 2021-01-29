@@ -1,6 +1,8 @@
 package com.android.covid19;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -11,12 +13,18 @@ import android.widget.TextView;
 public class About extends AppCompatActivity implements View.OnClickListener {
 
     TextView link1, link2;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+            setTheme(R.style.DarkActionBarTheme);
+        }else setTheme(R.style.LightActionBarTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
 
+        toolbar = findViewById(R.id.about_toolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("About");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

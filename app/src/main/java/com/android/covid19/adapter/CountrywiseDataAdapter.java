@@ -9,10 +9,12 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.covid19.R;
@@ -81,6 +83,7 @@ public class CountrywiseDataAdapter extends RecyclerView.Adapter<CountrywiseData
 
         ImageView flagImage;
         TextView countryName, totalcase;
+        LinearLayout container;
 
         public CountrywiseViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -88,6 +91,7 @@ public class CountrywiseDataAdapter extends RecyclerView.Adapter<CountrywiseData
             flagImage = itemView.findViewById(R.id.flagImageview);
             countryName = itemView.findViewById(R.id.countryNameTextview);
             totalcase = itemView.findViewById(R.id.totalCountrycaseTextView);
+            container = itemView.findViewById(R.id.countryview_container);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -95,6 +99,12 @@ public class CountrywiseDataAdapter extends RecyclerView.Adapter<CountrywiseData
                     itemClick.clickedItem(getAdapterPosition());
                 }
             });
+
+            if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+                container.setBackgroundResource(R.drawable.darkcard);
+                countryName.setTextColor(context.getResources().getColor(R.color.dark_mode_text_color));
+                totalcase.setTextColor(context.getResources().getColor(R.color.dark_mode_text_color));
+            }
         }
     }
 

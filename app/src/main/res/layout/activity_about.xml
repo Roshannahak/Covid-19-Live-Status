@@ -1,121 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".About">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <androidx.cardview.widget.CardView
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/about_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="10dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="5dp">
+            android:layout_height="?attr/actionBarSize"
+            app:titleTextColor="@color/white" />
+    </com.google.android.material.appbar.AppBarLayout>
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/about_mask_tamplet"
-                android:scaleType="centerCrop"/>
-
-        </androidx.cardview.widget.CardView>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/parent_background_color">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="10dp"
-            android:paddingBottom="20dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp">
+            android:orientation="vertical">
 
-            <TextView
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/about_mask_tamplet" />
+
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/objective"
-                android:textStyle="normal"
-                android:textAllCaps="false"
-                android:textAlignment="textStart"
-                android:textSize="16sp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:textAlignment="textStart"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:text="@string/software"
-                android:layout_marginTop="10dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textAlignment="textStart"
-                android:textAllCaps="false"
-                android:paddingStart="20dp"
-                android:paddingEnd="0dp"
-                android:text="@string/listOfsoft"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:textAlignment="textStart"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:text="@string/lib"
-                android:layout_marginTop="10dp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textAlignment="textStart"
-                android:textAllCaps="false"
-                android:paddingStart="20dp"
-                android:paddingEnd="0dp"
-                android:text="@string/listOflib"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAllCaps="false"
-                android:textAlignment="textStart"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:text="@string/api"
-                android:layout_marginTop="10dp"/>
-            <TextView
-                android:id="@+id/firstLinkTextview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textAlignment="textStart"
-                android:textAllCaps="false"
-                android:paddingStart="20dp"
-                android:paddingEnd="0dp"
-                android:text="@string/listOfapi1"
-                android:textColor="@color/linkcolor"/>
-            <TextView
-                android:id="@+id/secondLinkTextview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textAlignment="textStart"
-                android:textAllCaps="false"
-                android:paddingStart="20dp"
-                android:paddingEnd="0dp"
-                android:text="@string/listOfapi2"
-                android:textColor="@color/linkcolor"/>
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="vertical"
+                android:paddingBottom="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/objective"
+                    android:textAlignment="textStart"
+                    android:textColor="?attr/default_text_color"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="?attr/default_text_color"
+                    android:text="@string/software"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="0dp"
+                    android:textColor="?attr/default_text_color"
+                    android:text="@string/listOfsoft"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="?attr/default_text_color"
+                    android:text="@string/lib"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="20dp"
+                    android:textColor="?attr/default_text_color"
+                    android:paddingEnd="0dp"
+                    android:text="@string/listOflib"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="?attr/default_text_color"
+                    android:text="@string/api"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/firstLinkTextview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="0dp"
+                    android:text="@string/listOfapi1"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="@color/linkcolor"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/secondLinkTextview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="0dp"
+                    android:text="@string/listOfapi2"
+                    android:textAlignment="textStart"
+                    android:textAllCaps="false"
+                    android:textColor="@color/linkcolor"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
 
         </LinearLayout>
+    </ScrollView>
 
-    </LinearLayout>
-
-</ScrollView>
+</LinearLayout>

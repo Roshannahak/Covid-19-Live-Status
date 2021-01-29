@@ -7,9 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.covid19.R;
@@ -72,11 +74,19 @@ public class StatewiseDataAdapter extends RecyclerView.Adapter<StatewiseDataAdap
     public class StatewiseViewHolder extends RecyclerView.ViewHolder{
 
         TextView statenametxt, totalcasetxt;
+        LinearLayout container;
 
         public StatewiseViewHolder(@NonNull View itemView) {
             super(itemView);
             statenametxt = itemView.findViewById(R.id.stateNameTextView);
             totalcasetxt = itemView.findViewById(R.id.totalCaseTextView);
+            container = itemView.findViewById(R.id.stateview_container);
+
+            if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+                container.setBackgroundResource(R.drawable.darkcard);
+                statenametxt.setTextColor(context.getResources().getColor(R.color.dark_mode_text_color));
+                totalcasetxt.setTextColor(context.getResources().getColor(R.color.dark_mode_text_color));
+            }
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

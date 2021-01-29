@@ -3,7 +3,9 @@ package com.android.covid19;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -52,12 +54,18 @@ public class States extends AppCompatActivity implements StatewiseDataAdapter.pe
 
     SearchView searchView;
     String s;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+            setTheme(R.style.DarkActionBarTheme);
+        }else setTheme(R.style.LightActionBarTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_states);
 
+        toolbar = findViewById(R.id.state_toolbar);
+        setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("States");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

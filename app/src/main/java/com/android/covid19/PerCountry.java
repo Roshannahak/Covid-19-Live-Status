@@ -1,6 +1,8 @@
 package com.android.covid19;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -34,15 +36,20 @@ public class PerCountry extends AppCompatActivity {
     AnimatedPieView pieView;
     TextView confirmtxt, activetxt, recovertxt, deceasedtxt, todayconfirmtxt, todayrecovertxt, todaydeceasedtxt, populationtxt, testedtxt, datetxt, timetxt;
     String country_name, confirm, active, recovered, deceased, todayconfirm, todayrecover, todaydeceased, population, test, update;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+            setTheme(R.style.DarkActionBarTheme);
+        }else setTheme(R.style.LightActionBarTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_per_country);
 
         initializationViews();
         getIntentData();
 
+        setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(country_name);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -128,6 +135,7 @@ public class PerCountry extends AppCompatActivity {
     }
 
     private void getIntentData() {
+        toolbar = findViewById(R.id.per_country_toolbar);
         Intent intent = getIntent();
         country_name = intent.getStringExtra(COUNTRY_NAME);
         confirm = intent.getStringExtra(CONFIRMED);

@@ -1,6 +1,8 @@
 package com.android.covid19;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -33,15 +35,20 @@ public class PerState extends AppCompatActivity {
     TextView confirmtxt, activetxt, recoveredtxt, deceasedtxt, delta_confirmtxt, delta_deceasedtxt, delta_recoveredtxt, delta_activetxt, lastUpdateDatetxt, lastUpdateTimetxt;
     String confirmed, active, recovered, deceased, delta_confirmed, delta_deceased, delta_recovered, delta_active, state_name, last_update;
     String dateUpdate, timeUpdate;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+            setTheme(R.style.DarkActionBarTheme);
+        }else setTheme(R.style.LightActionBarTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_per_state);
 
         initializationView();
         fetchIntentData();
 
+        setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(state_name);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -141,6 +148,8 @@ public class PerState extends AppCompatActivity {
     }
 
     private void initializationView() {
+
+        toolbar = findViewById(R.id.per_state_toolbar);
 
         animatedPieView = findViewById(R.id.perstateAnimatedpieview);
 

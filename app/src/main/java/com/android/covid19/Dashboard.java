@@ -3,7 +3,9 @@ package com.android.covid19;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.ActionBarContextView;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -62,13 +64,20 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     String totalTest, oldtest, newsample, oldsample;
     CardView statebtn, countrybtn;
     SwipeRefreshLayout swipelayout;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+            setTheme(R.style.DarkActionBarTheme);
+        }else setTheme(R.style.LightActionBarTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
         initializationView();
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Covid-19 App");
 
         // Enable verbose OneSignal logging to debug issues if needed.
         OneSignal.setLogLevel(OneSignal.LOG_LEVEL.VERBOSE, OneSignal.LOG_LEVEL.NONE);
@@ -277,6 +286,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     }
 
     private void initializationView() {
+        toolbar = findViewById(R.id.dashboard_toolbar);
         linearLayout = findViewById(R.id.liniarlayout);
         swipelayout = findViewById(R.id.dashboardSwipeRefresh);
 
@@ -346,4 +356,23 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                 break;
         }
     }
+
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//        ToastMassage("on start");
+//        ToastMassage("value: "+DARK_MOOD_CHECKER);
+//        if (DARK_MOOD_CHECKER == 1){
+//            setTheme(R.style.DarkActionBarTheme);
+////            restartapp();
+//        }else {
+//            setTheme(R.style.LightActionBarTheme);
+////            restartapp();
+//        }
+//    }
+//
+//    private void restartapp() {
+//        Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+//        startActivity(intent);
+//    }
 }
