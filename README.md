@@ -94,15 +94,23 @@ Following are the details of the software as well as the libraries used to build
   India: [ https://api.covid19india.org/data.json](https://api.covid19india.org/data.json)<br>
   World wide: [https://corona.lmao.ninja/v2/countries](https://corona.lmao.ninja/v2/countries)<br>
   
-<div align = "center">
-	<p align = "left">
-		Dashboards are used to display the most important and useful information in your app.
+## Screenshot
+<table>
+		<tr>
+			<td align="left" width = "50%">Dashboards are used to display the most important and useful information in your app.
 Here is a detailed dashboard containing the vital information like active, recovered, confirmed and deceased cases along with the samples tested which is updated frequently on a pie-chart representation for user friendly experience.
-	</p>
-	<p align = "right">
-	<img src = "https://github.com/Roshannahak/Covid-19-Live-Status/blob/main/screenshots/dashboard.jpg" width = "250" height = "450"/>
-	</p>
-</div>
+</td>
+			<td align = "center"><img src = "https://github.com/Roshannahak/Covid-19-Live-Status/blob/main/screenshots/dashboard.jpg" width = "250" height = "450"/></td>
+		</tr>
+	<tr>
+			<td align="center"><img src = "https://github.com/Roshannahak/Covid-19-Live-Status/blob/main/screenshots/1508.png" width = "250" height = "500"/></td>
+			<td align="left">Notifications that will remind the user to take precautionary actions like cover the mouth and nose with a bent elbow or tissue when you cough or sneeze. Disposal of tissue and wash hands regularly with soap or use alcohol based hand sanitizer.</td>
+		</tr>
+	<tr>
+			<td align="center"><img src = "https://github.com/Roshannahak/Covid-19-Live-Status/blob/main/screenshots/country_list.jpg" width = "250" height = "450"/></td>
+			<td align="center"><img src = "https://github.com/Roshannahak/Covid-19-Live-Status/blob/main/screenshots/state_list.jpg" width = "250" height = "450"/></td>
+		</tr>
+	</table>
 
-<img align = "left" src = "https://github.com/Roshannahak/Covid-19-Live-Status/blob/main/screenshots/country_list.jpg" width = "250" height = "450"/>
-<img align = "left" src = "https://github.com/Roshannahak/Covid-19-Live-Status/blob/main/screenshots/state_list.jpg" width = "250" height = "450"/>
+## Developed by:
+Roshan Nahak<br> Follow By: [Linkedin](https://www.linkedin.com/in/roshan-nahak-a15833193/) | [Hackerrank](https://www.hackerrank.com/roshannahak)
