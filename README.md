@@ -92,8 +92,17 @@ Following are the details of the software as well as the libraries used to build
 
 #### API:-
   India: [ https://api.covid19india.org/data.json](https://api.covid19india.org/data.json)<br>
-  World wide: [https://corona.lmao.ninja/v2/countries](https://corona.lmao.ninja/v2/countries)
+  World wide: [https://corona.lmao.ninja/v2/countries](https://corona.lmao.ninja/v2/countries)<br>
+  
+<div align = "center">
+	<p align = "left">
+		Dashboards are used to display the most important and useful information in your app.
+Here is a detailed dashboard containing the vital information like active, recovered, confirmed and deceased cases along with the samples tested which is updated frequently on a pie-chart representation for user friendly experience.
+	</p>
+	<p align = "right">
+	<img src = "https://github.com/Roshannahak/Covid-19-Live-Status/blob/main/screenshots/dashboard.jpg" width = "250" height = "450"/>
+	</p>
+</div>
 
-<img align = "left" src = "https://github.com/Roshannahak/Covid-19-Live-Status/blob/main/screenshots/dashboard.jpg" width = "250" height = "450"/>
 <img align = "left" src = "https://github.com/Roshannahak/Covid-19-Live-Status/blob/main/screenshots/country_list.jpg" width = "250" height = "450"/>
 <img align = "left" src = "https://github.com/Roshannahak/Covid-19-Live-Status/blob/main/screenshots/state_list.jpg" width = "250" height = "450"/>
