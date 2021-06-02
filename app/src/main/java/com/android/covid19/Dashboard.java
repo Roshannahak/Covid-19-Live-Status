@@ -136,7 +136,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
     }
 
     private void fatchData() {
-        Call<CovidDataIndia> covidDataIndiaCall = APIClient.getinterface().getCovidData();
+        Call<CovidDataIndia> covidDataIndiaCall = APIClient.getinterface().getCovidData("https://api.covid19india.org/data.json");
         covidDataIndiaCall.enqueue(new Callback<CovidDataIndia>() {
             @Override
             public void onResponse(Call<CovidDataIndia> call, Response<CovidDataIndia> response) {

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -149,6 +150,13 @@ public class Countries extends AppCompatActivity implements CountrywiseDataAdapt
                 intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speck country name...");
                 startActivityForResult(intent, 1);
                 break;
+
+            case android.R.id.home:
+                // todo: goto back activity from here
+                final Intent intentd = NavUtils.getParentActivityIntent(Countries.this);
+                intentd.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                NavUtils.navigateUpTo(Countries.this, intentd);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

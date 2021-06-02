@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -58,9 +59,9 @@ public class States extends AppCompatActivity implements StatewiseDataAdapter.pe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+        if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
             setTheme(R.style.DarkActionBarTheme);
-        }else setTheme(R.style.LightActionBarTheme);
+        } else setTheme(R.style.LightActionBarTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_states);
 
@@ -85,15 +86,15 @@ public class States extends AppCompatActivity implements StatewiseDataAdapter.pe
     }
 
     private void fetchRecyclerData() {
-        Call<CovidDataIndia> covidDataIndiaCall = APIClient.getinterface().getCovidData();
+        Call<CovidDataIndia> covidDataIndiaCall = APIClient.getinterface().getCovidData("https://api.covid19india.org/data.json");
         covidDataIndiaCall.enqueue(new Callback<CovidDataIndia>() {
             @Override
             public void onResponse(Call<CovidDataIndia> call, Response<CovidDataIndia> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     CovidDataIndia covidDataIndia = response.body();
                     newstatewiseslist = new ArrayList<>();
                     List<Statewise> statewiselist = covidDataIndia.getStatewise();
-                    for (Statewise statewise : statewiselist.subList(1, statewiselist.size())){
+                    for (Statewise statewise : statewiselist.subList(1, statewiselist.size())) {
                         newstatewiseslist.add(statewise);
                     }
                     adapter = new StatewiseDataAdapter(getApplicationContext(), newstatewiseslist);
@@ -111,7 +112,7 @@ public class States extends AppCompatActivity implements StatewiseDataAdapter.pe
         });
     }
 
-    private void ToastMassage(String msg){
+    private void ToastMassage(String msg) {
         Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
     }
 
@@ -146,7 +147,7 @@ public class States extends AppCompatActivity implements StatewiseDataAdapter.pe
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.voice_search:
                 Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
                 intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -154,6 +155,13 @@ public class States extends AppCompatActivity implements StatewiseDataAdapter.pe
                 intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak state name...");
                 startActivityForResult(intent, 1);
                 break;
+
+            case android.R.id.home:
+                // todo: goto back activity from here
+                final Intent intentd = NavUtils.getParentActivityIntent(States.this);
+                intentd.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                NavUtils.navigateUpTo(States.this, intentd);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -161,7 +169,7 @@ public class States extends AppCompatActivity implements StatewiseDataAdapter.pe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && data != null){
+        if (resultCode == RESULT_OK && data != null) {
             ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             s = String.valueOf(result.get(0));
             String withoutAccent = Normalizer.normalize(s, Normalizer.Form.NFD);

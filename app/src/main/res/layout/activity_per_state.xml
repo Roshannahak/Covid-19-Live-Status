@@ -25,7 +25,7 @@
         android:layout_height="match_parent"
         android:background="?attr/parent_background_color"
         android:orientation="vertical"
-        android:weightSum="3">
+        android:weightSum="4">
 
 
         <androidx.cardview.widget.CardView
@@ -36,7 +36,7 @@
             app:cardBackgroundColor="?attr/card_background_color"
             android:layout_marginEnd="14dp"
             android:layout_marginBottom="5dp"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             app:cardCornerRadius="3dp"
             app:cardElevation="3dp">
 
@@ -132,7 +132,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.6">
+            android:layout_weight="1.7">
 
             <GridLayout
                 android:layout_width="match_parent"
@@ -357,8 +357,8 @@
             android:layout_marginStart="14dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="14dp"
-            android:layout_marginBottom="10dp"
-            android:layout_weight="0.4"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="0.5"
             android:gravity="center"
             android:orientation="vertical">
 
@@ -401,6 +401,38 @@
 
             </LinearLayout>
         </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="15dp"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="3dp"
+            app:cardBackgroundColor="?attr/button_background_color">
+
+            <LinearLayout
+                android:id="@+id/vaccineCenterButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Check your nearest vaccination center"
+                    android:textSize="18sp"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:autoSizeMinTextSize="14sp"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
     </LinearLayout>
 
 </LinearLayout>

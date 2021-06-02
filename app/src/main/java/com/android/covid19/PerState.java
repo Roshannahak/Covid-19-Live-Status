@@ -1,12 +1,18 @@
 package com.android.covid19;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NavUtils;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.razerdp.widget.animatedpieview.AnimatedPieView;
@@ -37,6 +43,8 @@ public class PerState extends AppCompatActivity {
     String dateUpdate, timeUpdate;
     Toolbar toolbar;
 
+    LinearLayout vaccinebtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
@@ -55,6 +63,16 @@ public class PerState extends AppCompatActivity {
 
         setDataInTextView();
 
+        handleButtonClicks();
+
+    }
+
+    private void handleButtonClicks() {
+        vaccinebtn.setOnClickListener(v -> {
+            Intent intent = new Intent(PerState.this, VaccinationCenters.class);
+            intent.putExtra(STATE_NAME, state_name);
+            startActivity(intent);
+        });
     }
 
     private void setDataInTextView() {
@@ -163,5 +181,22 @@ public class PerState extends AppCompatActivity {
         delta_activetxt = findViewById(R.id.perstate_delta_active_textview);
         lastUpdateDatetxt = findViewById(R.id.perstate_dateTextview);
         lastUpdateTimetxt = findViewById(R.id.perstate_timeTextview);
+
+        vaccinebtn = findViewById(R.id.vaccineCenterButton);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                // todo: goto back activity from here
+                final Intent intent = NavUtils.getParentActivityIntent(PerState.this);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                NavUtils.navigateUpTo(PerState.this, intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

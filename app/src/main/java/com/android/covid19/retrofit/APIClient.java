@@ -4,7 +4,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIClient {
-    public static String BASE_URL = "https://api.covid19india.org/";
+    public static String BASE_URL = "https://cdn-api.co-vin.in/api/v2/";
 
     public static APIServices apiServices = null;
 
