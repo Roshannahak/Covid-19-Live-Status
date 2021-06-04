@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
 
+import com.android.covid19.adapter.DatePickerAdapter;
 import com.android.covid19.adapter.VaccineCenterAdapter;
 import com.android.covid19.model.vaccination.District;
 import com.android.covid19.model.vaccination.DistrictVaccineCenters;
@@ -27,8 +28,12 @@ import com.android.covid19.model.vaccination.VaccinationDistricts;
 import com.android.covid19.model.vaccination.VaccinationState;
 import com.android.covid19.retrofit.APIClient;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,7 +41,7 @@ import retrofit2.Response;
 
 import static com.android.covid19.States.STATE_NAME;
 
-public class VaccinationCenters extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class VaccinationCenters extends AppCompatActivity implements AdapterView.OnItemClickListener, DatePickerAdapter.Getdate {
 
     Toolbar toolbar;
     String statename;
@@ -44,7 +49,11 @@ public class VaccinationCenters extends AppCompatActivity implements AdapterView
     VaccinationDistricts vaccinationDistricts;
     DistrictVaccineCenters districtVaccineCenters;
     RecyclerView vaccineCardRecyclerView;
+    RecyclerView datepickerRecycler;
     List<Session> sessionList;
+    List<String> dateList;
+    int selectedDistId;
+    String currentDate;
 
     List<District> districtList;
 
@@ -76,6 +85,24 @@ public class VaccinationCenters extends AppCompatActivity implements AdapterView
         statename = intent.getStringExtra(STATE_NAME);
 
         getStateDataFromApiCompare();
+
+        datePickerFunction();
+        currentDate = dateList.get(0);
+    }
+
+    private void datePickerFunction() {
+        dateList = new ArrayList<>();
+        for (int i = 0; i < 7; i++){
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.DATE, i);
+            String datestr = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(calendar.getTime());
+            dateList.add(datestr);
+        }
+
+        DatePickerAdapter datePickerAdapter = new DatePickerAdapter(getApplicationContext(), dateList);
+        datepickerRecycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        datePickerAdapter.setItemDateClickListener(VaccinationCenters.this);
+        datepickerRecycler.setAdapter(datePickerAdapter);
     }
 
     private void getDistrictDataFromApi() {
@@ -150,6 +177,8 @@ public class VaccinationCenters extends AppCompatActivity implements AdapterView
         districtDropdown = findViewById(R.id.districtDropdownItem);
 
         vaccineCardRecyclerView = findViewById(R.id.vaccine_center_recycler_view);
+
+        datepickerRecycler = findViewById(R.id.dateRecyclerView);
     }
 
     @Override
@@ -174,13 +203,13 @@ public class VaccinationCenters extends AppCompatActivity implements AdapterView
     //for dropdown list item select listener
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        int distId = districtList.get(position).getDistrictId();
+        selectedDistId = districtList.get(position).getDistrictId();
 
-        findCentersByDistID(distId);
+        findCentersByDistID(selectedDistId, currentDate);
     }
 
-    private void findCentersByDistID(int distId) {
-        Call<DistrictVaccineCenters> districtVaccineCentersCall = APIClient.getinterface().findVaccineCenters(distId, "02-06-2021");
+    private void findCentersByDistID(int distId, String currentDate) {
+        Call<DistrictVaccineCenters> districtVaccineCentersCall = APIClient.getinterface().findVaccineCenters(distId, currentDate);
         districtVaccineCentersCall.enqueue(new Callback<DistrictVaccineCenters>() {
             @Override
             public void onResponse(Call<DistrictVaccineCenters> call, Response<DistrictVaccineCenters> response) {
@@ -190,6 +219,7 @@ public class VaccinationCenters extends AppCompatActivity implements AdapterView
                     sessionList = new ArrayList<>();
                     sessionList.clear();
                     for (Session session : districtVaccineCenters.getSessions()){
+                        Log.d("logcall", session.getDate()+"  "+session.getName());
                         sessionList.add(session);
                     }
                     vaccineCenterAdapter = new VaccineCenterAdapter(getApplicationContext(), sessionList);
@@ -207,5 +237,13 @@ public class VaccinationCenters extends AppCompatActivity implements AdapterView
 
             }
         });
+    }
+
+    @Override
+    public void onViewClick(int position) {
+        String selecteddate = dateList.get(position);
+
+        findCentersByDistID(selectedDistId, selecteddate);
+        currentDate = selecteddate;
     }
 }

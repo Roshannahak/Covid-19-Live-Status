@@ -22,40 +22,59 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="?attr/parent_background_color">
+        android:background="?attr/parent_background_color"
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/linearView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:orientation="vertical"
-            android:paddingStart="14dp"
-            android:paddingEnd="14dp">
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:cardElevation="3dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/dateRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"/>
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
                 android:theme="@style/Theme.MaterialComponents.Light">
 
                 <AutoCompleteTextView
                     android:id="@+id/districtDropdownItem"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:padding="15dp"
-                    android:hint="select district"
                     android:background="#D5D5D5"
-                    android:inputType="none" />
+                    android:hint="select district"
+                    android:inputType="none"
+                    android:padding="15dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/vaccine_center_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/linearView1"/>
+            android:layout_below="@id/linearView1" />
     </RelativeLayout>
 
 </LinearLayout>
