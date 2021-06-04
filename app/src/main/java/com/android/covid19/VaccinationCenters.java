@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.covid19.adapter.DatePickerAdapter;
@@ -55,6 +56,8 @@ public class VaccinationCenters extends AppCompatActivity implements AdapterView
     int selectedDistId;
     String currentDate;
 
+    LinearLayout recyclerErrorMsg;
+
     List<District> districtList;
 
     AutoCompleteTextView districtDropdown;
@@ -92,7 +95,7 @@ public class VaccinationCenters extends AppCompatActivity implements AdapterView
 
     private void datePickerFunction() {
         dateList = new ArrayList<>();
-        for (int i = 0; i < 7; i++){
+        for (int i = 0; i < 7; i++) {
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.DATE, i);
             String datestr = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(calendar.getTime());
@@ -178,6 +181,8 @@ public class VaccinationCenters extends AppCompatActivity implements AdapterView
 
         vaccineCardRecyclerView = findViewById(R.id.vaccine_center_recycler_view);
 
+        recyclerErrorMsg = findViewById(R.id.recyclerErrorMsg_linearLayout);
+
         datepickerRecycler = findViewById(R.id.dateRecyclerView);
     }
 
@@ -213,21 +218,24 @@ public class VaccinationCenters extends AppCompatActivity implements AdapterView
         districtVaccineCentersCall.enqueue(new Callback<DistrictVaccineCenters>() {
             @Override
             public void onResponse(Call<DistrictVaccineCenters> call, Response<DistrictVaccineCenters> response) {
-                if (response.isSuccessful()){
+                if (response.isSuccessful()) {
                     districtVaccineCenters = response.body();
 
                     sessionList = new ArrayList<>();
                     sessionList.clear();
-                    for (Session session : districtVaccineCenters.getSessions()){
-                        Log.d("logcall", session.getDate()+"  "+session.getName());
+                    for (Session session : districtVaccineCenters.getSessions()) {
+                        Log.d("logcall", session.getDate() + "  " + session.getName());
                         sessionList.add(session);
+                    }
+                    if (sessionList.isEmpty() && distId != 0) {
+                        recyclerErrorMsg.setVisibility(View.VISIBLE);
                     }
                     vaccineCenterAdapter = new VaccineCenterAdapter(getApplicationContext(), sessionList);
                     vaccineCardRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     vaccineCardRecyclerView.setHasFixedSize(false);
                     vaccineCardRecyclerView.setAdapter(vaccineCenterAdapter);
                     vaccineCenterAdapter.notifyDataSetChanged();
-                }else {
+                } else {
                     massage("can't able to fetch response");
                 }
             }

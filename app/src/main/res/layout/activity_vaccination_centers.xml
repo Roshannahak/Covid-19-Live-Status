@@ -44,10 +44,10 @@
                         android:id="@+id/dateRecyclerView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:clipToPadding="false"
                         android:paddingStart="12dp"
-                        android:paddingEnd="12dp"
-                        android:layout_centerVertical="true"/>
+                        android:paddingEnd="12dp" />
                 </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
@@ -73,11 +73,51 @@
 
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/vaccine_center_recycler_view"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/linearView1" />
+            android:layout_height="match_parent"
+            android:layout_below="@id/linearView1">
+
+            <LinearLayout
+                android:id="@+id/recyclerErrorMsg_linearLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_centerInParent="true">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/empty_box" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textSize="20sp"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Empty"
+                    android:textStyle="bold"
+                    android:textColor="#E82E2E2E"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:layout_gravity="center_horizontal"
+                    android:text="We don't have any Information"
+                    android:textColor="#922E2E2E"/>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/vaccine_center_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
     </RelativeLayout>
 
 </LinearLayout>
