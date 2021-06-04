@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/dateviewRelativeLayout"
-    android:layout_width="75dp"
-    android:layout_height="wrap_content">
+    android:layout_width="80dp"
+    android:layout_height="35dp"
+    android:layout_marginStart="2dp"
+    android:layout_marginEnd="4dp">
 
+    <ImageView
+        android:id="@+id/not_selected_stroke"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/date_not_selected_stroke"/>
+    <ImageView
+        android:id="@+id/selected_stroke"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        android:src="@drawable/date_selected_stroke"/>
     <TextView
         android:id="@+id/datePickerTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:textSize="18sp"
         android:text="20 JUN"
         android:textAllCaps="false"

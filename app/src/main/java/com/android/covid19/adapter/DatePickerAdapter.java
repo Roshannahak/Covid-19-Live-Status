@@ -1,9 +1,11 @@
 package com.android.covid19.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -23,17 +25,19 @@ public class DatePickerAdapter extends RecyclerView.Adapter<DatePickerAdapter.Da
 
     Context context;
     List<String> dateList;
+    int selectposition = 0;
 
-    public interface Getdate{
+    public interface Getdate {
         void onViewClick(int position);
     }
+
     Getdate getdate;
 
-    public void setItemDateClickListener(Getdate getdate){
+    public void setItemDateClickListener(Getdate getdate) {
         this.getdate = getdate;
     }
 
-    public DatePickerAdapter (Context context, List<String> dateList){
+    public DatePickerAdapter(Context context, List<String> dateList) {
         this.context = context;
         this.dateList = dateList;
     }
@@ -57,6 +61,11 @@ public class DatePickerAdapter extends RecyclerView.Adapter<DatePickerAdapter.Da
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+        if (selectposition == position)
+            holder.selectedStroke.setVisibility(View.VISIBLE);
+        else
+            holder.selectedStroke.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -64,17 +73,27 @@ public class DatePickerAdapter extends RecyclerView.Adapter<DatePickerAdapter.Da
         return dateList.size();
     }
 
-    public class DatePickerViewHolder extends RecyclerView.ViewHolder{
+    public class DatePickerViewHolder extends RecyclerView.ViewHolder {
 
         TextView datetxt;
         RelativeLayout relativeLayout;
+        ImageView selectedStroke, nonSelectedStroke;
 
         public DatePickerViewHolder(@NonNull View itemView) {
             super(itemView);
             datetxt = itemView.findViewById(R.id.datePickerTextView);
             relativeLayout = itemView.findViewById(R.id.dateviewRelativeLayout);
+            selectedStroke = itemView.findViewById(R.id.selected_stroke);
+            nonSelectedStroke = itemView.findViewById(R.id.not_selected_stroke);
 
-            relativeLayout.setOnClickListener(v -> getdate.onViewClick(getAdapterPosition()));
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    getdate.onViewClick(getAdapterPosition());
+                    selectposition = getAdapterPosition();
+                    notifyDataSetChanged();
+                }
+            });
         }
     }
 }
