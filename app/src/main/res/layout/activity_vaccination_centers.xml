@@ -101,7 +101,7 @@
                     android:layout_gravity="center_horizontal"
                     android:text="Empty"
                     android:textStyle="bold"
-                    android:textColor="#E82E2E2E"/>
+                    android:textColor="#0C0E15"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

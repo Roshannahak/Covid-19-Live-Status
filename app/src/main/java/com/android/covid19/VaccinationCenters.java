@@ -227,9 +227,10 @@ public class VaccinationCenters extends AppCompatActivity implements AdapterView
                         Log.d("logcall", session.getDate() + "  " + session.getName());
                         sessionList.add(session);
                     }
-                    if (sessionList.isEmpty() && distId != 0) {
+                    if (sessionList.isEmpty() && distId != 0)
                         recyclerErrorMsg.setVisibility(View.VISIBLE);
-                    }
+                    else recyclerErrorMsg.setVisibility(View.GONE);
+
                     vaccineCenterAdapter = new VaccineCenterAdapter(getApplicationContext(), sessionList);
                     vaccineCardRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                     vaccineCardRecyclerView.setHasFixedSize(false);
