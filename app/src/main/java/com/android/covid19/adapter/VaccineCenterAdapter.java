@@ -43,8 +43,10 @@ public class VaccineCenterAdapter extends RecyclerView.Adapter<VaccineCenterAdap
         int dose1 = session.getAvailableCapacityDose1();
         int dose2 = session.getAvailableCapacityDose2();
 
-        if (total_capacity == 0 && dose1 == 0 && dose2 == 0){
+        if (total_capacity <= 0){
             holder.booked_status.setVisibility(View.VISIBLE);
+        }else{
+            holder.booked_status.setVisibility(View.GONE);
         }
 
         holder.fee_txt.setText(session.getFee());
