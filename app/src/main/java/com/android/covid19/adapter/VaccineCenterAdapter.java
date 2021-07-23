@@ -5,9 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.covid19.R;
@@ -77,6 +80,10 @@ public class VaccineCenterAdapter extends RecyclerView.Adapter<VaccineCenterAdap
                 dose2_txt;
         ImageView booked_status;
 
+        RelativeLayout cardBackground;
+        TextView dose1_dummy_txt, dose2_dummy_txt, fee_dummy_txt, vaccine_dummy_txt, age_dummy_txt, totaldose_dummy_txt;
+        CardView cardView;
+
         public VaccineCenterViewholder(@NonNull View itemView) {
             super(itemView);
             fee_txt = itemView.findViewById(R.id.feeTextview);
@@ -90,6 +97,38 @@ public class VaccineCenterAdapter extends RecyclerView.Adapter<VaccineCenterAdap
             dose2_txt = itemView.findViewById(R.id.dose2Textview);
 
             booked_status = itemView.findViewById(R.id.booked_status_imageview);
+
+            cardBackground = itemView.findViewById(R.id.vaccine_card);
+            dose1_dummy_txt = itemView.findViewById(R.id.dose1DummyTextview);
+            dose2_dummy_txt = itemView.findViewById(R.id.dose2DummyTextview);
+            fee_dummy_txt = itemView.findViewById(R.id.feeDummyTextview);
+            vaccine_dummy_txt = itemView.findViewById(R.id.vaccineTypeDummyTextview);
+            age_dummy_txt = itemView.findViewById(R.id.ageDummyTextview);
+            totaldose_dummy_txt = itemView.findViewById(R.id.capacityDummyTextview);
+            cardView = itemView.findViewById(R.id.card1);
+
+            if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+                cardBackground.setBackgroundResource(R.drawable.darkcard);
+                cardView.setCardBackgroundColor(context.getResources().getColor(R.color.button_color));
+                fee_txt.setTextColor(context.getResources().getColor(R.color.dark_mode_text_color));
+                fee_type_txt.setTextColor(context.getResources().getColor(R.color.dark_mode_text_color));
+                name_txt.setTextColor(context.getResources().getColor(R.color.dark_mode_text_color));
+                address_txt.setTextColor(context.getResources().getColor(R.color.dark_mode_text_color));
+                vaccine_type_txt.setTextColor(context.getResources().getColor(R.color.dark_mode_text_color));
+                age_txt.setTextColor(context.getResources().getColor(R.color.dark_mode_text_color));
+                total_capacity_txt.setTextColor(context.getResources().getColor(R.color.dark_mode_text_color));
+                dose1_txt.setTextColor(context.getResources().getColor(R.color.dark_mode_text_color));
+                dose2_txt.setTextColor(context.getResources().getColor(R.color.dark_mode_text_color));
+                fee_dummy_txt.setTextColor(context.getResources().getColor(R.color.dark_mode_text_color));
+                vaccine_dummy_txt.setTextColor(context.getResources().getColor(R.color.dark_mode_text_color));
+                age_dummy_txt.setTextColor(context.getResources().getColor(R.color.dark_mode_text_color));
+                totaldose_dummy_txt.setTextColor(context.getResources().getColor(R.color.dark_mode_text_color));
+
+                dose1_dummy_txt.setBackgroundColor(context.getResources().getColor(R.color.button_color));
+                dose1_dummy_txt.setTextColor(context.getResources().getColor(R.color.dark_mode_text_color));
+                dose2_dummy_txt.setBackgroundColor(context.getResources().getColor(R.color.button_color));
+                dose2_dummy_txt.setTextColor(context.getResources().getColor(R.color.dark_mode_text_color));
+            }
         }
     }
 }

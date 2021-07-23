@@ -38,6 +38,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
+                    android:background="?attr/parent_background_color"
                     android:layout_height="match_parent">
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -82,35 +83,37 @@
                 android:id="@+id/recyclerErrorMsg_linearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
+                android:layout_centerInParent="true"
                 android:orientation="vertical"
-                android:visibility="gone"
-                android:layout_centerInParent="true">
+                android:padding="5dp"
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/empty_box" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textSize="20sp"
                     android:layout_gravity="center_horizontal"
                     android:text="Empty"
-                    android:textStyle="bold"
-                    android:textColor="#0C0E15"/>
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="?attr/default_text_color"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textSize="16sp"
                     android:layout_gravity="center_horizontal"
                     android:text="We don't have any Information"
-                    android:textColor="#922E2E2E"/>
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="?attr/default_text_color"
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView

@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.covid19.R;
@@ -85,6 +86,10 @@ public class DatePickerAdapter extends RecyclerView.Adapter<DatePickerAdapter.Da
             relativeLayout = itemView.findViewById(R.id.dateviewRelativeLayout);
             selectedStroke = itemView.findViewById(R.id.selected_stroke);
             nonSelectedStroke = itemView.findViewById(R.id.not_selected_stroke);
+
+            if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES){
+                datetxt.setTextColor(context.getResources().getColor(R.color.dark_mode_text_color));
+            }
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

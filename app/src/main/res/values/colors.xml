@@ -7,4 +7,5 @@
     <color name="dark_mode_text_color">#E4E6EB</color>
     <color name="transparentBg">#D8000000</color>
     <color name="linkcolor">#00CCFF</color>
+    <color name="button_color">#3A3B3C</color>
 </resources>
