@@ -12,45 +12,56 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_new_launcher"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
         <activity
             android:name=".VaccinationCenters"
+            android:exported="true"
             android:parentActivityName=".PerState"
             android:screenOrientation="portrait" />
 
         <activity
             android:name=".About"
+            android:exported="true"
             android:parentActivityName=".Dashboard"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Settings"
+            android:exported="true"
             android:parentActivityName=".Dashboard"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Team"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/transparent" />
         <activity
             android:name=".PerCountry"
+            android:exported="true"
             android:parentActivityName=".Countries"
             android:screenOrientation="portrait" />
         <activity
             android:name=".PerState"
+            android:exported="true"
             android:parentActivityName=".States"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Countries"
+            android:exported="true"
             android:parentActivityName=".Dashboard"
             android:screenOrientation="portrait" />
         <activity
             android:name=".States"
+            android:exported="true"
             android:parentActivityName=".Dashboard"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Dashboard"
+            android:exported="true"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Splash_screen"
+            android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/LightActionBarTheme">
             <intent-filter>
