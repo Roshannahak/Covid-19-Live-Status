@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.android.covid19">
+    package="com.colive.covid19">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,52 +15,52 @@
         android:usesCleartextTraffic="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".VaccinationCenters"
+            android:name="com.colive.covid19.VaccinationCenters"
             android:exported="true"
-            android:parentActivityName=".PerState"
+            android:parentActivityName="com.colive.covid19.PerState"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".About"
+            android:name="com.colive.covid19.About"
             android:exported="true"
-            android:parentActivityName=".Dashboard"
+            android:parentActivityName="com.colive.covid19.Dashboard"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Settings"
+            android:name="com.colive.covid19.Settings"
             android:exported="true"
-            android:parentActivityName=".Dashboard"
+            android:parentActivityName="com.colive.covid19.Dashboard"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Team"
+            android:name="com.colive.covid19.Team"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/transparent" />
         <activity
-            android:name=".PerCountry"
+            android:name="com.colive.covid19.PerCountry"
             android:exported="true"
-            android:parentActivityName=".Countries"
+            android:parentActivityName="com.colive.covid19.Countries"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".PerState"
+            android:name="com.colive.covid19.PerState"
             android:exported="true"
-            android:parentActivityName=".States"
+            android:parentActivityName="com.colive.covid19.States"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Countries"
+            android:name="com.colive.covid19.Countries"
             android:exported="true"
-            android:parentActivityName=".Dashboard"
+            android:parentActivityName="com.colive.covid19.Dashboard"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".States"
+            android:name="com.colive.covid19.States"
             android:exported="true"
-            android:parentActivityName=".Dashboard"
+            android:parentActivityName="com.colive.covid19.Dashboard"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Dashboard"
+            android:name="com.colive.covid19.Dashboard"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Splash_screen"
+            android:name="com.colive.covid19.Splash_screen"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/LightActionBarTheme">

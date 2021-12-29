@@ -5,7 +5,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.android.covid19"
+        applicationId "com.colive.covid19"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 2
